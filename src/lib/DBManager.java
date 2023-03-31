@@ -2,9 +2,7 @@ package lib;
 
 import java.sql.*;
 public class DBManager {
-	private final String URL = "jdbc:postgresql://localhost:5432/postgres";
-	private final String user = "postgres";
-	private final String pass = "cs250900";
+	private final PasswordManager p = new PasswordManager();
 	public DBManager () {
 		try{
 			Class.forName("org.postgresql.Driver");     
@@ -16,7 +14,7 @@ public class DBManager {
 		Connection c = null;
 		try {
 			//Get connection
-			c = DriverManager.getConnection(URL, user, pass);
+			c = DriverManager.getConnection(p.URL, p.user, p.pass);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
