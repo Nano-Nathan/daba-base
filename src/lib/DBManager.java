@@ -2,7 +2,7 @@ package lib;
 
 import java.sql.*;
 public class DBManager {
-	private final PasswordManager p = new PasswordManager();
+	private final PasswordManagerLocal p = new PasswordManagerLocal();
 	public DBManager () {
 		try{
 			Class.forName("org.postgresql.Driver");     
