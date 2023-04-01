@@ -3,6 +3,7 @@ package lib;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -71,9 +72,9 @@ public class JSwingManager {
 		oModel.setDataVector(new Object[][]{}, new Object[]{});
 		table.updateUI();
 	}	
-	public void addRows(Object[] values) {
-		for (Object e : values) {
-			addRow((Object[])e);
+	public void addRows(List<Object[]> values) {
+		for (Object[] e : values) {
+			addRow(e);
 		}
 	}
 	public void addRow (Object[] values) {

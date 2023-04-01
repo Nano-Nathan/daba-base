@@ -1,21 +1,29 @@
 package TP2;
 
+import java.util.List;
+import lib.DBManager;
 import lib.JSwingManager;
 
 public class Main {
 	public static void main(String[] args) {
 		JSwingManager window = new JSwingManager();
-		window.addButton("agregar columnas", () -> {
-			window.addColumns("test", "test2", "test3");
+		DBManager db = new DBManager();
+
+		window.addButton("SELECT query", () -> {
+			window.resetTable();
+			List<Object[]> results = db.executeSELECT("SELECT * FROM schools WHERE id=42974117;");
+			window.addColumns((String[])results.get(0));
+			window.addRows(results);
 		});
-		window.addButton("agregar filas", () -> {
-			window.addRow(new Object[] {"value 1", "value 2", "value 3"});
-		});
-		window.addButton("eliminar columna", () -> {
+
+		window.addButton("Limpiar tabla", () -> {
 			window.resetTable();
 		});
-		//window.addButton("test1");
-		//window.addButton("tes2");
+
+		window.addButton("INSERT query", () -> {
+			db.executeINSERT("INSERT INTO schools (id) VALUES (?);", 42974117);
+		});
+
 		window.open();
 	}
 }
