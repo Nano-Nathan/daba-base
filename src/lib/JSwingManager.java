@@ -38,10 +38,11 @@ public class JSwingManager {
         //Create and bind table
         table = new JTable();
         table.setModel(oModel);
+		JScrollPane scrollPane = new JScrollPane(table);
         
         //Add panel and table to Frame
         frame.getContentPane().add(BorderLayout.WEST, panel);
-        frame.getContentPane().add(BorderLayout.CENTER, table);
+        frame.getContentPane().add(BorderLayout.CENTER, scrollPane);
 	}
 	
 	//Add button to left panel
