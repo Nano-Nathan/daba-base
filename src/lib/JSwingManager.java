@@ -14,6 +14,7 @@ public class JSwingManager {
 	private JPanel panel; 
 	private DefaultTableModel oModel;
 	private JTable table;
+	private JMenuBar menuBar;
 	
 	//Constructor
 	public JSwingManager() {
@@ -39,10 +40,14 @@ public class JSwingManager {
         table = new JTable();
         table.setModel(oModel);
 		JScrollPane scrollPane = new JScrollPane(table);
+
+		//Create menu bar for change form to view
+		menuBar = new JMenuBar();
         
-        //Add panel and table to Frame
+        //Add menu bar, panel and table to Frame
         frame.getContentPane().add(BorderLayout.WEST, panel);
         frame.getContentPane().add(BorderLayout.CENTER, scrollPane);
+		frame.getContentPane().add(BorderLayout.NORTH, menuBar);
 	}
 	
 	//Add button to left panel
@@ -52,13 +57,43 @@ public class JSwingManager {
 		//Add action listener
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		      method.action();
-		   }
+				method.action();
+		   	}
 		});
 		//Add button to panel
 		panel.add(button);
 	}
 	
+	//Add menu bar
+	public void addMenu(String title, String item, Method method) {
+		JMenu menu;
+		JMenuItem menuItem = new JMenuItem(item);
+		
+		//Add action listener
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				method.action();
+		   	}
+		});
+
+		//Get the menu and add the item
+		for (int i = 0; i < menuBar.getMenuCount(); i++) {
+			menu = menuBar.getMenu(i);
+			//If is the menu
+			if(menu.getText() == title){
+				//Add the menu item
+				menu.add(menuItem);
+				//Finish execution
+				return;
+			}
+		}
+
+		//If the menu does not exist, it is created
+		menu = new JMenu(title);
+		menu.add(menuItem);
+		menuBar.add(menu);
+	}
+
 	//Methods to manage Table
 	public void addColumns (String... values) {
 		for (String e : values) {
