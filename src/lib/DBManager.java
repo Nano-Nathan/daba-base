@@ -2,7 +2,6 @@ package lib;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DBManager {
 	private Connection c;
@@ -70,9 +69,9 @@ public class DBManager {
 	
 
 	//Internal logic query
-	private List<Object[]> resultSELECT(){
-		//List of results
-		List<Object[]> results = new ArrayList<>();
+	private ArrayList<Object[]> resultSELECT(){
+		//ArrayList of results
+		ArrayList<Object[]> results = new ArrayList<>();
 		try {
 			//Execute query
 			ResultSet rs = stmt.executeQuery();
@@ -100,8 +99,8 @@ public class DBManager {
 			//Close result
 			rs.close();
 		} catch (Exception e) {
-			System.out.println(e);
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
 		}
 		return results;
 	}
@@ -109,8 +108,8 @@ public class DBManager {
 		try {
 			return stmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
 		}
 		return 0;
 	}
@@ -118,16 +117,16 @@ public class DBManager {
 		try {
 			return stmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e);
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
 		}
 		return 0;
 	}
 
 	@SuppressWarnings("unchecked")
 	//Excecute SELECT
-	public List<Object[]> executeSELECT (String query) {
-		return (List<Object[]>) execute("SELECT", query, new Object[] {});
+	public ArrayList<Object[]> executeSELECT (String query) {
+		return (ArrayList<Object[]>) execute("SELECT", query, new Object[] {});
 	}
 	//Excecute UPDATE
 	public boolean executeUPDATE (String query, Object... params) {
