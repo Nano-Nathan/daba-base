@@ -19,6 +19,7 @@ public class JSwingManager {
 	private JTable table;
 	private ArrayList<JCheckBox> checkBoxs;
 	private ArrayList<JTextArea> textAreas;
+	private ArrayList<JComboBox<String>> comboBoxs;
 	
 	//Constructor
 	public JSwingManager() {
@@ -58,6 +59,9 @@ public class JSwingManager {
 
 		//Init list of text areas
 		textAreas = new ArrayList<>();
+
+		//Init list of comboboxs
+		comboBoxs = new ArrayList<>();
         
         //Add menu bar, panel and table to Frame
         frame.getContentPane().add(BorderLayout.WEST, panel);
@@ -158,11 +162,24 @@ public class JSwingManager {
 		addButtons(text, method, "right");
 	}
 	
+	//Add combobox
+	public void addComboBox (String label, String... items) {
+		//Create label
+		JLabel l = new JLabel(label);
+		//Create combobox
+		JComboBox<String> comboBox = new JComboBox<>(items);
+
+		comboBoxs.add(comboBox);
+
+		//Add items
+		panel.add(l);
+		panel.add(comboBox);
+	}
+
 	//Add text areas
 	private void addTextAreas (String label, int columns, int rows, String namePanel) {
 		//Create label
 		JLabel l = new JLabel(label);
-		l.setHorizontalAlignment(SwingConstants.CENTER);
 		//Create text area
 		JTextArea textArea = new JTextArea();
 		textArea.setColumns(columns);
